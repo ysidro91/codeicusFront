@@ -53,23 +53,3 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
-
-### commands
-
-ng g m material --flat
-
-ng g m components/shared
-ng g c components/shared/menu -s --skip-tests
-ng g c components/tasks -s --skip-tests --skip-import
-ng g c components/tasks/showTasks -s --skip-tests --skip-import
-ng g c components/tasks/manageTask -s --skip-tests --skip-import
-ng g c components/info/showInfo -s --skip-tests --skip-import
-
-ng g s services/notifications/notifications --skip-tests
-ng g s services/tasks/tasks --skip-tests
-ng g s services/tables/tables --skip-tests
-
-ng g i interfaces/task
-
-ng g p pipes/modified --skip-tests --skip-import
