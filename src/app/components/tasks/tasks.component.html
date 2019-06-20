@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-between bd-highlight mb-3">
+    <div class="p-2 bd-highlight">
+        <h1>{{ title }}</h1>
+    </div>
+    <div class="p-2 bd-highlight">
+        <button mat-icon-button type="button" color="primary" (click)="showTaskEdit(null)" title="Crear tarea">
+        <i class="fas fa-plus"></i>
+        </button>
+    </div>
+</div>
+
+<mat-progress-bar mode="indeterminate" *ngIf="loadingTasks"></mat-progress-bar>
+<div *ngIf="tasksList.data.length === 0 && !loadingTasks">
+    <div class="alert alert-primary" role="alert">
+        <h4 class="alert-heading">No hay tareas registradas</h4>
+        <p>Puede iniciar creando una</p>
+    </div>
+</div>
+<app-show-tasks 
+    *ngIf="tasksList.data.length > 0" 
+    [tasks]="tasksList"
+    (reloadTasks)="reload($event)"
+    (taskData)="showTaskEdit($event)">
+</app-show-tasks>
+<app-manage-task
+    *ngIf="showTaskManager"
+    [task]="taskSelected"
+    [title]="titleManage"
+    (reloadTasks)="reload($event)">
+</app-manage-task>

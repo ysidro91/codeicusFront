@@ -1,0 +1,64 @@
+<div class="mat-elevation-z8 text-center m-3">
+  <mat-table [dataSource]="tasks">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.id }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="created">
+      <mat-header-cell *matHeaderCellDef> Creada </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.created }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="detail">
+      <mat-header-cell *matHeaderCellDef> Detalle </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary" (click)="viewDetail(element)" data-toggle="modal" data-target="#taskModal">
+          <i class="fas fa-eye"></i>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef> Editar </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary" (click)=editTask(element)>
+          <i class="fas fa-edit"></i>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="trash">
+      <mat-header-cell *matHeaderCellDef> Borrar </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary" (click)=delete(element.id)>
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="COLUMNS"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: COLUMNS;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true"></mat-paginator>
+</div>
+
+<div *ngIf="currentTask">
+  <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Tarea creada el {{ currentTask.created }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="currentTask = null">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            {{ currentTask.name }}
+          </div>
+          <div class="modal-footer">
+            {{ currentTask.modified | modified }}
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
